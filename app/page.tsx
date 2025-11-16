@@ -10,6 +10,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { useRef } from 'react'; // <-- Required for arrows
+import Image from 'next/image';
 
 export default function Home() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -79,9 +80,14 @@ export default function Home() {
           <div className="max-w-6xl mx-auto relative z-10">
             <div className="text-center mb-8 md:mb-12">
               <div className="inline-block mb-6">
-                <div className="w-24 h-24 md:w-32 md:h-32 mx-auto bg-[#fe7f86] rounded-full flex items-center justify-center shadow-2xl border-4 border-white">
-                  <span className="text-white text-5xl md:text-6xl font-light">A</span>
-                </div>
+                <div className="w-32 h-32 md:w-40 md:h-40 mx-auto rounded-full shadow-2xl border-4 border-pink-200 overflow-hidden relative">
+  <Image 
+    src="/logo.jpeg" 
+    alt="Amazia Logo" 
+    fill
+    className="object-cover"
+  />
+</div>
               </div>
               
               <h1 className="text-4xl md:text-6xl font-light text-[#2d2d2d] mb-6 tracking-wide">
