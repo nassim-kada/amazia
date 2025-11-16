@@ -2,7 +2,6 @@
 
 import { Navigation } from '@/components/navigation'
 import { Footer } from '@/components/footer'
-import { Card } from '@/components/ui/card'
 import { Mail, Phone, Instagram, Facebook, Linkedin } from 'lucide-react'
 
 export default function AboutPage() {

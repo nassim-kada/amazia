@@ -10,7 +10,11 @@ export default function BejaiaActivitiesPage() {
   const [selectedType, setSelectedType] = React.useState<string>('all');
   const [selectedCategory, setSelectedCategory] = React.useState<string>('all');
 
-  const activities = getActivitiesByCity('bejaia') || [];
+  const activities = React.useMemo(() => getActivitiesByCity('bejaia') || [], []);
+  const uniqueCategories = React.useMemo(() => {
+    const categories = new Set(activities.map(activity => activity.category));
+    return Array.from(categories).sort();
+  }, [activities]);
 
   const filteredActivities = activities.filter(activity => {
     const typeMatch = selectedType === 'all' || activity.type === selectedType;
@@ -35,12 +39,10 @@ export default function BejaiaActivitiesPage() {
       
       <main className="min-h-screen bg-[#fffef5]">
 
-        {/* Filters Section */}
         <section className="py-8 md:py-12 px-4 bg-[#fffef5]">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-center">
               
-              {/* Type Filter */}
               <div className="w-full md:w-auto">
                 <label className="block text-sm text-[#5a5a5a] mb-2 font-light">Activity Type</label>
                 <div className="flex gap-3">
@@ -79,7 +81,6 @@ export default function BejaiaActivitiesPage() {
                 </div>
               </div>
 
-              {/* Category Filter */}
               <div className="w-full md:w-auto">
                 <label className="block text-sm text-[#5a5a5a] mb-2 font-light">Category</label>
                 <div className="flex flex-wrap gap-3">
@@ -93,52 +94,24 @@ export default function BejaiaActivitiesPage() {
                   >
                     All
                   </button>
-                  <button
-                    onClick={() => setSelectedCategory('Nature')}
-                    className={`px-6 py-2.5 rounded-full text-sm font-light transition-all duration-300 ${
-                      selectedCategory === 'Nature'
-                        ? 'bg-[#fe7f86] text-white shadow-lg shadow-[#fe7f86]/30'
-                        : 'bg-white/60 text-[#5a5a5a] hover:bg-white border border-[#fe9f99]/30'
-                    }`}
-                  >
-                    Nature
-                  </button>
-                  <button
-                    onClick={() => setSelectedCategory('Sports')}
-                    className={`px-6 py-2.5 rounded-full text-sm font-light transition-all duration-300 ${
-                      selectedCategory === 'Sports'
-                        ? 'bg-[#fe7f86] text-white shadow-lg shadow-[#fe7f86]/30'
-                        : 'bg-white/60 text-[#5a5a5a] hover:bg-white border border-[#fe9f99]/30'
-                    }`}
-                  >
-                    Sports
-                  </button>
-                  <button
-                    onClick={() => setSelectedCategory('Cultural')}
-                    className={`px-6 py-2.5 rounded-full text-sm font-light transition-all duration-300 ${
-                      selectedCategory === 'Cultural'
-                        ? 'bg-[#fe7f86] text-white shadow-lg shadow-[#fe7f86]/30'
-                        : 'bg-white/60 text-[#5a5a5a] hover:bg-white border border-[#fe9f99]/30'
-                    }`}
-                  >
-                    Cultural
-                  </button>
-                  <button
-                    onClick={() => setSelectedCategory('Community')}
-                    className={`px-6 py-2.5 rounded-full text-sm font-light transition-all duration-300 ${
-                      selectedCategory === 'Community'
-                        ? 'bg-[#fe7f86] text-white shadow-lg shadow-[#fe7f86]/30'
-                        : 'bg-white/60 text-[#5a5a5a] hover:bg-white border border-[#fe9f99]/30'
-                    }`}
-                  >
-                    Community
-                  </button>
+                  {uniqueCategories.map((category) => (
+                    <button
+                      key={category}
+                      onClick={() => setSelectedCategory(category)}
+                      className={`px-6 py-2.5 rounded-full text-sm font-light transition-all duration-300 ${
+                        selectedCategory === category
+                          ? 'bg-[#fe7f86] text-white shadow-lg shadow-[#fe7f86]/30'
+                          : 'bg-white/60 text-[#5a5a5a] hover:bg-white border border-[#fe9f99]/30'
+                      }`}
+                    >
+                      {category}
+                    </button>
+                  ))}
                 </div>
               </div>
 
             </div>
 
-            {/* Results Count */}
             <div className="text-center mt-8">
               <p className="text-lg text-[#5a5a5a] font-light">
                 {filteredActivities.length} {filteredActivities.length === 1 ? 'experience' : 'experiences'} found
@@ -147,34 +120,27 @@ export default function BejaiaActivitiesPage() {
           </div>
         </section>
 
-        {/* Activities Section */}
         <section className="py-12 md:py-24 px-4 bg-[#fffef5]">
           <div className="max-w-7xl mx-auto">
 
-            {/* Activities Grid */}
-{/* Activities Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {filteredActivities.map((activity, index) => (
                 <div 
                   key={index}
                   className="group"
                 >
-                  {/* Card Container */}
                   <div className="bg-white/40 backdrop-blur-sm rounded-2xl border border-[#fe9f99]/30 hover:border-[#fe7f86] transition-all duration-500 hover:shadow-2xl hover:shadow-[#fe9f99]/20 overflow-hidden">
                     
-                    {/* Image */}
                     <div className="relative h-40 md:h-48 overflow-hidden">
                       <img 
-                        src="/bejaia.jpeg" 
+                        src={`/${activity.image}`} 
                         alt={activity.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                     </div>
 
-                    {/* Content */}
                     <div className="p-5 md:p-6">
-                      {/* Header Row */}
                       <div className="flex items-start justify-between mb-6">
                         <div className="flex-1">
                           <h3 className="text-xl md:text-2xl font-light text-[#2d2d2d] mb-2 group-hover:text-[#fe7f86] transition-colors">
@@ -200,33 +166,27 @@ export default function BejaiaActivitiesPage() {
                         </div>
                       </div>
 
-                      {/* Location */}
                       <div className="flex items-start gap-2 mb-5 text-[#5a5a5a]">
                         <MapPin className="w-4 h-4 flex-shrink-0 mt-1 text-[#fe7f86]" />
                         <p className="text-sm md:text-base">{activity.location}</p>
                       </div>
 
-                      {/* Description */}
                       <p className="text-base md:text-lg text-[#4a4a4a] mb-6 leading-relaxed font-light">
                         {activity.description}
                       </p>
 
-                      {/* Divider */}
                       <div className="h-px bg-gradient-to-r from-[#fe9f99]/50 via-[#fdfbca]/50 to-transparent mb-6"></div>
 
-                      {/* Footer Row */}
                       <div className="flex items-center justify-between">
-                        {/* Rating & Review */}
                         <div className="flex-1">
                           <div className="flex items-center gap-1.5 mb-1.5">
                             {renderStars(activity.rating)}
                           </div>
                           <p className="text-xs md:text-sm italic text-[#5a5a5a]">
-                            "{activity.review}"
+                            &ldquo;{activity.review}&rdquo;
                           </p>
                         </div>
 
-                        {/* Button */}
                         <button className="ml-4 bg-[#fe7f86] hover:bg-[#fe6f76] text-white py-3 px-6 md:px-8 rounded-full transition-all duration-300 text-sm md:text-base font-light whitespace-nowrap hover:shadow-lg hover:shadow-[#fe7f86]/30">
                           {activity.type === 'Outing' ? 'Join' : 'Explore'}
                         </button>

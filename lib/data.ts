@@ -1,10 +1,11 @@
 export interface Activity {
   name: string;
-  type: 'Outing' | 'Solo';
-  category: 'Nature' | 'Sports' | 'Cultural' | 'Community';
+  type: 'Outing' | 'Solo' | 'Restaurant' | 'CoffeeShop' | 'Cinema' | 'Arcade' | 'Museum';
+  category: 'Nature' | 'Sports' | 'Cultural' | 'Community' | 'Food' | 'Entertainment';
   location: string;
   description: string;
   rating: number;
+  image?:string;
   review: string;
   city: string;
 }
@@ -31,6 +32,7 @@ export const activities: Activity[] = [
     location: 'Béjaïa, Algeria',
     description: 'Guided hike with panoramic sea views',
     rating: 5,
+    image:'hkiing.jpeg',
     review: 'Safe and scenic.',
     city: 'bejaia'
   },
@@ -41,12 +43,14 @@ export const activities: Activity[] = [
     location: 'Near Béjaïa, Algeria',
     description: 'Guided trip to waterfalls with picnic.',
     rating: 4,
+    image:'kefrida.jpeg',
     review: 'Refreshing and fun.',
     city: 'bejaia'
   },
   {
     name: 'Kayaking – Soummam River',
     type: 'Outing',
+    image:'kayak.jpeg',
     category: 'Sports',
     location: 'Bejaia province',
     description: 'Paddle through calm waters with a guide.',
@@ -55,21 +59,12 @@ export const activities: Activity[] = [
     city: 'bejaia'
   },
   {
-    name: 'Parachute Jumping',
-    type: 'Outing',
-    category: 'Sports',
-    location: 'Béjaïa Airport area',
-    description: 'Thrilling freefall with professional instructors.',
-    rating: 4,
-    review: 'Thrilling but safe.',
-    city: 'bejaia'
-  },
-  {
     name: 'Yemma Gouraya Mountain Top',
     type: 'Solo',
     category: 'Nature',
     location: 'Béjaïa, Algeria',
     description: 'Panoramic views, safe hike alone.',
+    image:'kefrida.jpeg',
     rating: 5,
     review: 'Unforgettable view.',
     city: 'bejaia'
@@ -79,6 +74,7 @@ export const activities: Activity[] = [
     type: 'Solo',
     category: 'Nature',
     location: 'Béjaïa Province',
+    image:'cap_carbon.jpeg',
     description: 'Lighthouse + cliffs, iconic photo spot.',
     rating: 4,
     review: 'Magical sunset.',
@@ -91,6 +87,7 @@ export const activities: Activity[] = [
     location: 'Béjaïa, Algeria',
     description: 'Historic fortress with city views.',
     rating: 4,
+    image:'casbah_bej.jpeg',
     review: 'Rich history.',
     city: 'bejaia'
   },
@@ -101,17 +98,8 @@ export const activities: Activity[] = [
     location: 'Central Béjaïa',
     description: 'Explore Kabyle heritage and artifacts.',
     rating: 4,
+    image:'',
     review: 'Informative.',
-    city: 'bejaia'
-  },
-  {
-    name: 'Art Gallery Visit',
-    type: 'Solo',
-    category: 'Cultural',
-    location: 'Béjaïa city center',
-    description: 'Contemporary Algerian art exhibitions.',
-    rating: 4,
-    review: 'Beautiful artworks.',
     city: 'bejaia'
   },
   {
@@ -121,19 +109,107 @@ export const activities: Activity[] = [
     location: 'Béjaïa theaters',
     description: 'Local cinema experience with community vibe.',
     rating: 4,
+    image:'music_conert.jpeg',
     review: 'Fun evening.',
     city: 'bejaia'
   },
-  {
-    name: 'Marathon',
-    type: 'Solo',
-    category: 'Community',
-    location: 'Béjaïa City',
-    description: 'Scenic coastal running event.',
-    rating: 4,
-    review: 'Well organized.',
-    city: 'bejaia'
-  }
+  // --- Restaurants ---
+{
+  name: 'Restaurant La Renaissance',
+  type: 'Restaurant',
+  category: 'Food',
+  location: 'Q33H+9F Béjaïa city center',
+  description: 'Elegant Algerian and Mediterranean cuisine, refined atmosphere.',
+  rating: 5,
+  image: 'la_renaissance.jpeg',
+  review: 'Delicious food, classy ambiance.',
+  city: 'bejaia'
+},
+{
+  name: 'Restaurant Le Dauphin',
+  type: 'Restaurant',
+  category: 'Food',
+  location: 'Béjaïa Corniche',
+  description: 'Fresh seafood & Kabyle dishes with panoramic sea views.',
+  rating: 5,
+  image: 'le_dauphin.jpeg',
+  review: 'Best seafood in Béjaïa.',
+  city: 'bejaia'
+},
+
+// --- Cinema ---
+{
+  name: 'Cinémathèque de Béjaïa',
+  type: 'Cinema',
+  category: 'Entertainment',
+  location: 'Q33P+264 Béjaïa city center',
+  description: 'Historic cinema showing Algerian & international films.',
+  rating: 4,
+  image: 'cinema.jpeg',
+  review: 'Great atmosphere, safe and lively.',
+  city: 'bejaia'
+},
+
+// --- Arcade ---
+{
+  name: 'PlayLand',
+  type: 'Arcade',
+  category: 'Entertainment',
+  location: 'P3XC+GHX Béjaïa',
+  description: 'Family-friendly arcade with games and rides.',
+  rating: 4,
+  image: 'playland.jpeg',
+  review: 'Fun and safe for families.',
+  city: 'bejaia'
+},
+
+// --- Coffee Shops ---
+{
+  name: 'Café Bajio',
+  type: 'CoffeeShop',
+  category: 'Food',
+  location: 'P3X5+57V Béjaïa',
+  description: 'Scenic café with sea views, perfect for sunsets.',
+  rating: 4,
+  image: 'bajio.jpeg',
+  review: 'Beautiful view, relaxing spot.',
+  city: 'bejaia'
+},
+{
+  name: 'Blue Jazz Coffee',
+  type: 'CoffeeShop',
+  category: 'Food',
+  location: 'Place Gueydon, Béjaïa',
+  description: 'Cozy café with jazz ambiance, great for evenings.',
+  rating: 4,
+  image: 'blue_jazz.jpeg',
+  review: 'Great vibe and central location.',
+  city: 'bejaia'
+},
+
+// --- Museums ---
+{
+  name: 'Musée El Moudjahid',
+  type: 'Museum',
+  category: 'Cultural',
+  location: 'Q35G+5XH Béjaïa',
+  description: 'War museum dedicated to Algeria’s independence.',
+  rating: 5,
+  image: 'elmoudjahid.jpeg',
+  review: 'Powerful and educational.',
+  city: 'bejaia'
+},
+{
+  name: 'Akham n Waman n Tuga',
+  type: 'Museum',
+  category: 'Cultural',
+  location: 'Tuga village, Béjaïa Province',
+  description: 'Cultural house preserving Kabyle traditions and crafts.',
+  rating: 4,
+  image: 'toudja.jpeg',
+  review: 'Authentic Kabyle heritage.',
+  city: 'bejaia'
+}
 ];
 export const reservations: Accommodation[] = [
   {
