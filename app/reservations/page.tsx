@@ -29,19 +29,22 @@ export default function BejaiaReservationsPage() {
   };
 
   const nextImage = () => {
-    if (selectedCard !== null && filteredReservations[selectedCard].images) {
-      setCurrentImageIndex((prev) => 
-        (prev + 1) % filteredReservations[selectedCard].images.length
-      );
+    if (selectedCard !== null && filteredReservations[selectedCard]?.images) {
+      const images = filteredReservations[selectedCard].images;
+      if (images) {
+        setCurrentImageIndex((prev) => (prev + 1) % images.length);
+      }
     }
   };
 
   const prevImage = () => {
-    if (selectedCard !== null && filteredReservations[selectedCard].images) {
-      setCurrentImageIndex((prev) => 
-        (prev - 1 + filteredReservations[selectedCard].images.length) % 
-        filteredReservations[selectedCard].images.length
-      );
+    if (selectedCard !== null && filteredReservations[selectedCard]?.images) {
+      const images = filteredReservations[selectedCard].images;
+      if (images) {
+        setCurrentImageIndex((prev) => 
+          (prev - 1 + images.length) % images.length
+        );
+      }
     }
   };
 
@@ -60,12 +63,10 @@ export default function BejaiaReservationsPage() {
     <div>
       <Navigation />
       <main className="min-h-screen bg-[#fffef5]">
-        {/* Filters Section */}
         <section className="py-8 md:py-12 px-4 bg-[#fffef5]">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-center">
               
-              {/* Type Filter */}
               <div className="w-full md:w-auto">
                 <label className="block text-sm text-[#5a5a5a] mb-2 font-light">Accommodation Type</label>
                 <div className="flex gap-3">
@@ -103,7 +104,6 @@ export default function BejaiaReservationsPage() {
               </div>
             </div>
 
-            {/* Results Count */}
             <div className="text-center mt-8">
               <p className="text-lg text-[#5a5a5a] font-light">
                 {filteredReservations.length} {filteredReservations.length === 1 ? 'accommodation' : 'accommodations'} found
@@ -112,20 +112,16 @@ export default function BejaiaReservationsPage() {
           </div>
         </section>
 
-        {/* Reservations Section */}
         <section className="py-12 md:py-24 px-4 bg-[#fffef5]">
           <div className="max-w-7xl mx-auto">
-            {/* Reservations Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {filteredReservations.map((reservation, index) => (
                 <div 
                   key={index}
                   className="group"
                 >
-                  {/* Card Container */}
                   <div className="bg-white/40 backdrop-blur-sm rounded-2xl border border-[#fe9f99]/30 hover:border-[#fe7f86] transition-all duration-500 hover:shadow-2xl hover:shadow-[#fe9f99]/20 overflow-hidden h-full flex flex-col">
                     
-                    {/* Image - Clickable */}
                     <div 
                       className="relative h-40 md:h-48 overflow-hidden cursor-pointer"
                       onClick={() => openModal(index)}
@@ -139,7 +135,6 @@ export default function BejaiaReservationsPage() {
                       <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-sm font-light text-[#5a5a5a]">
                         {reservation.type}
                       </div>
-                      {/* Photo count indicator */}
                       {reservation.images && reservation.images.length > 1 && (
                         <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-sm px-3 py-1 rounded-full text-xs text-white flex items-center gap-1">
                           <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -150,9 +145,7 @@ export default function BejaiaReservationsPage() {
                       )}
                     </div>
 
-                    {/* Content */}
                     <div className="p-5 md:p-6 flex-1 flex flex-col">
-                      {/* Header */}
                       <div className="mb-4">
                         <h3 className="text-xl md:text-2xl font-light text-[#2d2d2d] mb-3 group-hover:text-[#fe7f86] transition-colors">
                           {reservation.name}
@@ -162,18 +155,15 @@ export default function BejaiaReservationsPage() {
                         </div>
                       </div>
 
-                      {/* Location */}
                       <div className="flex items-start gap-2 mb-4 text-[#5a5a5a]">
                         <MapPin className="w-4 h-4 flex-shrink-0 mt-1 text-[#fe7f86]" />
                         <p className="text-sm">{reservation.address}</p>
                       </div>
 
-                      {/* Description */}
                       <p className="text-base text-[#4a4a4a] mb-4 leading-relaxed font-light flex-1">
                         {reservation.description}
                       </p>
 
-                      {/* Info Grid */}
                       <div className="space-y-2 mb-4 text-sm text-[#5a5a5a]">
                         {reservation.checkIn && (
                           <div className="flex items-center gap-2">
@@ -195,10 +185,8 @@ export default function BejaiaReservationsPage() {
                         )}
                       </div>
 
-                      {/* Divider */}
                       <div className="h-px bg-gradient-to-r from-[#fe9f99]/50 via-[#fdfbca]/50 to-transparent mb-4"></div>
 
-                      {/* Footer */}
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                           <div className="flex items-center gap-2 text-[#fe7f86] font-medium mb-1">
@@ -206,7 +194,7 @@ export default function BejaiaReservationsPage() {
                             <span className="text-base">{reservation.price}</span>
                           </div>
                           <p className="text-xs italic text-[#5a5a5a]">
-                            "{reservation.review}"
+                            &ldquo;{reservation.review}&rdquo;
                           </p>
                         </div>
 
@@ -222,8 +210,7 @@ export default function BejaiaReservationsPage() {
           </div>
         </section>
 
-        {/* Image Modal */}
-        {selectedCard !== null && (
+        {selectedCard !== null && filteredReservations[selectedCard] && (
           <div 
             className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
             onClick={closeModal}
@@ -232,7 +219,6 @@ export default function BejaiaReservationsPage() {
               className="relative max-w-5xl w-full bg-white rounded-2xl overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close Button */}
               <button
                 onClick={closeModal}
                 className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white text-[#5a5a5a] rounded-full p-2 transition-all duration-300 hover:shadow-lg"
@@ -240,7 +226,6 @@ export default function BejaiaReservationsPage() {
                 <X className="w-6 h-6" />
               </button>
 
-              {/* Image Container */}
               <div className="relative bg-gray-100 flex items-center justify-center" style={{ height: '70vh' }}>
                 <img
                   src={filteredReservations[selectedCard].images?.[currentImageIndex] || '/bejaia.jpeg'}
@@ -249,7 +234,6 @@ export default function BejaiaReservationsPage() {
                   style={{ maxHeight: '90%', maxWidth: '90%' }}
                 />
 
-                {/* Navigation Arrows */}
                 {filteredReservations[selectedCard].images && 
                  filteredReservations[selectedCard].images.length > 1 && (
                   <>
@@ -272,13 +256,11 @@ export default function BejaiaReservationsPage() {
                   </>
                 )}
 
-                {/* Image Counter */}
                 <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm px-4 py-2 rounded-full text-white text-sm">
                   {currentImageIndex + 1} / {filteredReservations[selectedCard].images?.length || 1}
                 </div>
               </div>
 
-              {/* Thumbnail Strip */}
               {filteredReservations[selectedCard].images && 
                filteredReservations[selectedCard].images.length > 1 && (
                 <div className="flex gap-2 p-4 overflow-x-auto bg-gray-50">
@@ -302,7 +284,6 @@ export default function BejaiaReservationsPage() {
                 </div>
               )}
 
-              {/* Hotel Info */}
               <div className="p-6 bg-white border-t border-gray-200">
                 <h3 className="text-2xl font-light text-[#2d2d2d] mb-2">
                   {filteredReservations[selectedCard].name}
@@ -318,6 +299,7 @@ export default function BejaiaReservationsPage() {
           </div>
         )}
       </main>
+      <Footer />
     </div>
   );
 }
