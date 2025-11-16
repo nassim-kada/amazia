@@ -98,7 +98,7 @@ export const activities: Activity[] = [
     location: 'Central Béjaïa',
     description: 'Explore Kabyle heritage and artifacts.',
     rating: 4,
-    image:'',
+    image:'tour.jpeg',
     review: 'Informative.',
     city: 'bejaia'
   },
