@@ -4,7 +4,7 @@ import React from 'react';
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
 import { MapPin, Star, Home, Users, Heart, X, ChevronLeft, ChevronRight } from 'lucide-react';
-import { getAllHosts, getHostsByVillage, type Host } from '@/lib/data';
+import { getAllHosts, type Host } from '@/lib/data';
 
 export default function KabyleHostsPage() {
   const [selectedVillage, setSelectedVillage] = React.useState<string>('all');
@@ -59,12 +59,10 @@ export default function KabyleHostsPage() {
     <div>
       <Navigation />
       <main className="min-h-screen bg-[#fffef5]">
-        {/* Filters Section */}
         <section className="py-8 md:py-12 px-4 bg-[#fffef5]">
           <div className="max-w-7xl mx-auto">
             <div className="flex flex-col md:flex-row gap-6 items-start md:items-center justify-center">
               
-              {/* Village Filter */}
               <div className="w-full md:w-auto">
                 <label className="block text-sm text-[#5a5a5a] mb-2 font-light">Village</label>
                 <div className="flex flex-wrap gap-3">
@@ -112,7 +110,6 @@ export default function KabyleHostsPage() {
               </div>
             </div>
 
-            {/* Results Count */}
             <div className="text-center mt-8">
               <p className="text-lg text-[#5a5a5a] font-light">
                 {filteredHosts.length} {filteredHosts.length === 1 ? 'host' : 'hosts'} found
@@ -121,10 +118,8 @@ export default function KabyleHostsPage() {
           </div>
         </section>
 
-        {/* Hosts Section */}
         <section className="py-12 md:py-24 px-4 bg-[#fffef5]">
           <div className="max-w-7xl mx-auto">
-            {/* Hosts Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
               {filteredHosts.map((host, index) => (
                 <div 
@@ -132,10 +127,8 @@ export default function KabyleHostsPage() {
                   className="group cursor-pointer"
                   onClick={() => openHostModal(host)}
                 >
-                  {/* Card Container */}
                   <div className="bg-white/40 backdrop-blur-sm rounded-2xl border border-[#fe9f99]/30 hover:border-[#fe7f86] transition-all duration-500 hover:shadow-2xl hover:shadow-[#fe9f99]/20 overflow-hidden h-full flex flex-col">
                     
-                    {/* Image */}
                     <div className="relative h-64 md:h-72 overflow-hidden">
                       <img 
                         src={host.images[0]} 
@@ -148,9 +141,7 @@ export default function KabyleHostsPage() {
                       </div>
                     </div>
 
-                    {/* Content */}
                     <div className="p-5 md:p-6 flex-1 flex flex-col">
-                      {/* Header */}
                       <div className="mb-4">
                         <h3 className="text-xl md:text-2xl font-light text-[#2d2d2d] mb-3 group-hover:text-[#fe7f86] transition-colors">
                           {host.name}
@@ -160,18 +151,15 @@ export default function KabyleHostsPage() {
                         </div>
                       </div>
 
-                      {/* Village */}
                       <div className="flex items-start gap-2 mb-4 text-[#5a5a5a]">
                         <MapPin className="w-4 h-4 flex-shrink-0 mt-1 text-[#fe7f86]" />
                         <p className="text-sm">{host.village}</p>
                       </div>
 
-                      {/* Living Status */}
                       <p className="text-base text-[#4a4a4a] mb-4 leading-relaxed font-light flex-1">
                         {host.livingStatus}
                       </p>
 
-                      {/* Experiences */}
                       <div className="space-y-2 mb-4">
                         <div className="flex items-start gap-2 text-sm text-[#5a5a5a]">
                           <Heart className="w-4 h-4 flex-shrink-0 mt-0.5 text-[#fe7f86]" />
@@ -183,14 +171,12 @@ export default function KabyleHostsPage() {
                         </div>
                       </div>
 
-                      {/* Divider */}
                       <div className="h-px bg-gradient-to-r from-[#fe9f99]/50 via-[#fdfbca]/50 to-transparent mb-4"></div>
 
-                      {/* Footer */}
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                           <p className="text-xs italic text-[#5a5a5a]">
-                            "{host.review}"
+                            &ldquo;{host.review}&rdquo;
                           </p>
                         </div>
 
@@ -212,7 +198,6 @@ export default function KabyleHostsPage() {
           </div>
         </section>
 
-        {/* Modal */}
         {selectedHost && (
           <div 
             className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
@@ -222,7 +207,6 @@ export default function KabyleHostsPage() {
               className="bg-white rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative"
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close Button */}
               <button
                 onClick={closeHostModal}
                 className="absolute top-4 right-4 z-10 bg-white/90 hover:bg-white rounded-full p-2 transition-all duration-300 shadow-lg"
@@ -230,7 +214,6 @@ export default function KabyleHostsPage() {
                 <X className="w-6 h-6 text-[#5a5a5a]" />
               </button>
 
-              {/* Image Gallery */}
               <div className="relative h-96 md:h-[500px] overflow-hidden rounded-t-3xl bg-[#fffef5]">
                 <img 
                   src={selectedHost.images[currentImageIndex]} 
@@ -238,7 +221,6 @@ export default function KabyleHostsPage() {
                   className="w-full h-full object-contain"
                 />
                 
-                {/* Navigation Arrows */}
                 {selectedHost.images.length > 1 && (
                   <>
                     <button
@@ -254,7 +236,6 @@ export default function KabyleHostsPage() {
                       <ChevronRight className="w-6 h-6 text-[#5a5a5a]" />
                     </button>
 
-                    {/* Image Counter */}
                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm">
                       {currentImageIndex + 1} / {selectedHost.images.length}
                     </div>
@@ -262,9 +243,7 @@ export default function KabyleHostsPage() {
                 )}
               </div>
 
-              {/* Content */}
               <div className="p-6 md:p-8">
-                {/* Header */}
                 <div className="mb-6">
                   <div className="flex items-start justify-between mb-3">
                     <h2 className="text-2xl md:text-3xl font-light text-[#2d2d2d]">
@@ -283,12 +262,9 @@ export default function KabyleHostsPage() {
                   </div>
                 </div>
 
-                {/* Divider */}
                 <div className="h-px bg-gradient-to-r from-[#fe9f99]/50 via-[#fdfbca]/50 to-[#fe9f99]/50 mb-6"></div>
 
-                {/* Details Grid */}
                 <div className="grid md:grid-cols-2 gap-6 mb-6">
-                  {/* Living Status */}
                   <div>
                     <h3 className="text-lg font-light text-[#2d2d2d] mb-2 flex items-center gap-2">
                       <Home className="w-5 h-5 text-[#fe7f86]" />
@@ -297,7 +273,6 @@ export default function KabyleHostsPage() {
                     <p className="text-[#5a5a5a] leading-relaxed">{selectedHost.livingStatus}</p>
                   </div>
 
-                  {/* Children */}
                   <div>
                     <h3 className="text-lg font-light text-[#2d2d2d] mb-2 flex items-center gap-2">
                       <Users className="w-5 h-5 text-[#fe7f86]" />
@@ -307,13 +282,11 @@ export default function KabyleHostsPage() {
                   </div>
                 </div>
 
-                {/* House Description */}
                 <div className="mb-6">
                   <h3 className="text-lg font-light text-[#2d2d2d] mb-2">House Description</h3>
                   <p className="text-[#5a5a5a] leading-relaxed">{selectedHost.house.description}</p>
                 </div>
 
-                {/* Experiences */}
                 <div className="mb-6">
                   <h3 className="text-lg font-light text-[#2d2d2d] mb-3">Experiences Offered</h3>
                   <div className="flex flex-wrap gap-2">
@@ -328,7 +301,6 @@ export default function KabyleHostsPage() {
                   </div>
                 </div>
 
-                {/* Village Features */}
                 <div className="mb-6">
                   <h3 className="text-lg font-light text-[#2d2d2d] mb-3">Village Features</h3>
                   <div className="flex flex-wrap gap-2">
@@ -343,14 +315,12 @@ export default function KabyleHostsPage() {
                   </div>
                 </div>
 
-                {/* Review */}
                 <div className="bg-[#fdfbca]/30 rounded-2xl p-6 mb-6">
                   <p className="text-lg italic text-[#5a5a5a] text-center">
-                    "{selectedHost.review}"
+                    &ldquo;{selectedHost.review}&rdquo;
                   </p>
                 </div>
 
-                {/* Reserve Button */}
                 <button className="w-full bg-[#fe7f86] hover:bg-[#fe6f76] text-white py-4 rounded-full transition-all duration-300 text-lg font-light hover:shadow-lg hover:shadow-[#fe7f86]/30">
                   {selectedHost.cta}
                 </button>
