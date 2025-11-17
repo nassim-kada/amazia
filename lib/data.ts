@@ -1,7 +1,7 @@
 export interface Activity {
   name: string;
-  type: 'Outing' | 'Solo' | 'Restaurant' | 'CoffeeShop' | 'Cinema' | 'Arcade' | 'Museum';
-  category: 'Nature' | 'Sports' | 'Cultural' | 'Community' | 'Food' | 'Entertainment';
+  type: 'Outing' | 'Solo' | 'Restaurant' | 'CoffeeShop' | 'Cinema' | 'Arcade' | 'Museum' |'Store';
+  category: 'Nature' | 'Sports' | 'Cultural' | 'Community' | 'Food' | 'Entertainment' | 'Shopping';
   location: string;
   description: string;
   rating: number;
@@ -35,6 +35,39 @@ export const activities: Activity[] = [
     image:'hkiing.jpeg',
     review: 'Safe and scenic.',
     city: 'bejaia'
+  },
+  {
+    name:"Boutique Masaya",
+    type:'Store',
+    category:'Shopping',
+    location:'Bejaia',
+    rating:5,
+    description:'Boutique with kabyle outfits ',
+    image:'masaya.jpeg',
+    review:'trending kabyle fashion',
+    city:'Bejaia',
+  },
+  {
+    name:"Az art Deco",
+    type:'Store',
+    category:'Shopping',
+    location:'Bejaia',
+    rating:4,
+    description:'handmade crafts',
+    image:'azart.jpeg',
+    review:'unique authentic pieces',
+    city:'Bejaia',
+  },
+   {
+    name:"ait amrane jewelery",
+    type:'Store',
+    category:'Shopping',
+    location:'Bejaia',
+    rating:5,
+    description:'jewelry specializing in kabyle silver and traditional design',
+    image:'ait_amrane.jpeg',
+    review:'beautiful authentic pieces',
+    city:'Bejaia',
   },
   {
     name: 'Kefrida Waterfalls',
